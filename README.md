@@ -51,7 +51,7 @@ In distributed systems, data replication helps in high availability, fault toler
 ### 2. Clone the Project
 
 ```bash
-git clone https://github.com/your-username/distributed-db-replication.git
+git clone https://github.com/AbdoZaher/DDB/tree/main
 
 ```
 ------
