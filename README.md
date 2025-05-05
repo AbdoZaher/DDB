@@ -128,7 +128,8 @@ Master: Success
 On Slave:
 Received from master: INSERT INTO students(name, age) VALUES ('Ali', 22)
 
-👨‍💻 Authors :
+👨‍💻 Authors 
+
 Abdelrahman Ali Zaher 
 
 Ahmed Mohamed Ahmed
