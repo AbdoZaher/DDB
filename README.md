@@ -68,17 +68,27 @@ go get github.com/go-sql-driver/mysql
 go get github.com/joho/godotenv
 
 🚀 Running the Project
+
 ✅ Run the Master
+
 On the Master machine or terminal:
+
 go run Master.go
+
 The Master listens on TCP port 8080 and waits for Slaves to connect.
 
+
 ✅ Run a Slave
+
 On each Slave machine or terminal (can be the same or different machines):
+
 go run Slave.go
+
 Each Slave connects to the Master and listens for queries.
 
+
 💡 Usage
+
 You input SQL queries into the Master terminal.
 
 The Master:
@@ -122,11 +132,17 @@ It will retry connecting every 5 seconds.
 Once the Master is available again, the Slave reconnects automatically.
 
 📌 Example
+
 On Master:
+
 Enter SQL query: INSERT INTO students(name, age) VALUES ('Ali', 22)
+
 Master: Success
+
 On Slave:
+
 Received from master: INSERT INTO students(name, age) VALUES ('Ali', 22)
+
 
 👨‍💻 Authors 
 
