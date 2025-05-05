@@ -27,9 +27,13 @@ In distributed systems, data replication helps in high availability, fault toler
 ## 📁 Project Structure
 
 +-------------+ +-------------+ +-------------+
+
 | Client | ---> | Master | ---> | Slave |
+
 | (query) | | (DB + TCP) | | (Local DB) |
+
 +-------------+ +-------------+ +-------------+
+
 
 * Master handles input, executes queries, and forwards to all connected Slaves.
 
