@@ -63,20 +63,27 @@ git clone https://github.com/AbdoZaher/DDB/tree/main
 ```
 ------
 3. Create .env File
+   
 Inside the root directory, create a .env file with your DB credentials:
 
-DB_USER=root
 
-DB_PASS=rootroot
+DB_USER=root 
+
+
+DB_PASS=rootroot 
+
 
 
 4. Initialize Go Modules and Install Dependencies
 
 go mod init distributed-db-replication
 
+
 go get github.com/go-sql-driver/mysql
 
+
 go get github.com/joho/godotenv
+
 
 
 🚀 Running the Project
