@@ -49,8 +49,11 @@ In distributed systems, data replication helps in high availability, fault toler
 ### 1. Requirements
 
 - Go installed (v1.16+ recommended)
+- 
 - MySQL installed and running
+- 
 - A MySQL database named `school` created
+  
 
 ### 2. Clone the Project
 
@@ -63,13 +66,18 @@ git clone https://github.com/AbdoZaher/DDB/tree/main
 Inside the root directory, create a .env file with your DB credentials:
 
 DB_USER=root
+
 DB_PASS=rootroot
+
 
 4. Initialize Go Modules and Install Dependencies
 
 go mod init distributed-db-replication
+
 go get github.com/go-sql-driver/mysql
+
 go get github.com/joho/godotenv
+
 
 🚀 Running the Project
 
