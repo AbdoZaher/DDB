@@ -49,9 +49,9 @@ In distributed systems, data replication helps in high availability, fault toler
 ### 1. Requirements
 
 - Go installed (v1.16+ recommended)
-- 
+
 - MySQL installed and running
-- 
+ 
 - A MySQL database named `school` created
   
 
@@ -67,10 +67,10 @@ git clone https://github.com/AbdoZaher/DDB/tree/main
 Inside the root directory, create a .env file with your DB credentials:
 
 
-DB_USER=root 
+  DB_USER=root 
 
 
-DB_PASS=rootroot 
+  DB_PASS=rootroot 
 
 
 
