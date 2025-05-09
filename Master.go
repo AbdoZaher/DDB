@@ -4,17 +4,15 @@ import (
 	"bufio"
 	"database/sql"
 	"fmt"
-	"net" //TCP protocol
+	"net"//TCP protocol
 	"os"
 	"strings"
-
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv" //load .env (environment variables)
+	"github.com/joho/godotenv"//load .env (environment variables)
 )
 
 var db *sql.DB
 var slaveConns []net.Conn
-
 /*
 db: Database connection object.
 
@@ -35,7 +33,7 @@ func init() {
 	}
 
 	dsn := fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/school", user, pass)
-	fmt.Println("Using DSN:", dsn) //DSN data source name
+	fmt.Println("Using DSN:", dsn)//DSN data source name
 
 	var errDB error
 	db, errDB = sql.Open("mysql", dsn)
@@ -66,30 +64,37 @@ func StartTCPServer() {
 
 func HandleSlave(conn net.Conn) {
 	defer conn.Close()
-	buffer := make([]byte, 4096)
+	reader := bufio.NewReader(conn)
+
+	// Read identity line (e.g., [GUI] or [SLAVE])
+	identityLine, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Failed to read identity.")
+		return
+	}
+	identityLine = strings.TrimSpace(identityLine)
+
 	for {
-		n, err := conn.Read(buffer)
+		query, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println("Slave disconnected.")
+			fmt.Println("Client disconnected.")
 			return
 		}
-		query := string(buffer[:n])
-		query = strings.TrimSpace(query) //هنا مستخدم trim برضو حضرتك
+		query = strings.TrimSpace(query)
 
-		if isCriticalQuery(query) {
+		if identityLine != "[GUI]" && isCriticalQuery(query) {
 			errMsg := "Error: Critical queries like DROP or CREATE are not allowed from slaves.\n"
 			conn.Write([]byte(errMsg))
-			fmt.Println("Blocked critical query from slave:", query)
-		} else {
-
-			result := ExecuteQuery(query)
-			conn.Write([]byte(result))
-			for _, slave := range slaveConns {
-				slave.Write([]byte(query))
-			}
+			fmt.Printf("Blocked critical query from slave %v: %s\n", conn.RemoteAddr(), query)
+			return
 		}
+
+		result := ExecuteQuery(query)
+		conn.Write([]byte(result))
 	}
 }
+
+
 
 func isCriticalQuery(query string) bool {
 	query = strings.ToUpper(query)
@@ -154,10 +159,13 @@ func main() {
 		result := ExecuteQuery(query)
 		fmt.Println("Master:", result)
 
-		if !isCriticalQuery(query) {
+		if isCriticalQuery(query) {
+			fmt.Println("Executed critical query on master only.")
+		} else {
 			for _, slave := range slaveConns {
 				slave.Write([]byte(query))
 			}
 		}
+		
 	}
 }
