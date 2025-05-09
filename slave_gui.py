@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext, messagebox
 import socket
 
-HOST = '100.95.65.72'  # IP of master
+HOST = '192.168.1.13'  # IP of master
 PORT = 8080
 
 def send_query():
