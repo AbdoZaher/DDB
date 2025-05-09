@@ -33,6 +33,8 @@ In distributed systems, data replication helps in high availability, fault toler
 | (query) | | (DB + TCP) | | (Local DB) |
 
 +-------------+ +-------------+ +-------------+
+![WhatsApp Image 2025-05-06 at 18 45 34_d017ed36](https://github.com/user-attachments/assets/b1aea72f-095d-46cf-a9d8-a94d099e276f)
+
 
 
 * Master handles input, executes queries, and forwards to all connected Slaves.
@@ -169,3 +171,4 @@ Abdelrahman Ali Zaher
 
 Ahmed Mohamed Ahmed
 
+Moamen Bakr-Elsedeq Noaman
