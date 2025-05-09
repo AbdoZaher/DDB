@@ -7,7 +7,7 @@ import (
 	"net"
 	"os"
 	"strings"
-	"time"
+	"time" //only
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -63,7 +63,7 @@ func ExecuteLocal(query string) {
 
 func ConnectToMaster() {
 	for {
-		conn, err := net.Dial("tcp", "100.95.65.72:8080")
+		conn, err := net.Dial("tcp", "100:8080")
 		if err != nil {
 			fmt.Println("Master unavailable. Retrying in 5 seconds...")
 			time.Sleep(5 * time.Second)
