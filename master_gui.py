@@ -16,7 +16,11 @@ def send_query():
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((HOST, PORT))
-        s.sendall(query.encode())
+
+        full_message = "[GUI]\n" + query.strip() + "\n"
+        s.sendall(full_message.encode())
+
+
         response = s.recv(8192).decode()
         output.delete("1.0", tk.END)
         output.insert(tk.END, response)
